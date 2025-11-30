@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Задача1Каргин</title>
+    </head>
+    <body>
+        <input type="number" id="num" placeholder="Введите число" min="2">
+        <button onclick="calculate()">Разложить</button>
+        <div id="result"></div>
+
+        <script>
+            function calculate() 
+            {
+                let n = parseInt(document.getElementById('num').value);
+                let result = document.getElementById('result');
+                
+                if (n < 2) 
+                {
+                    result.innerHTML = "Введите число больше 1";
+                    return;
+                }
+                
+                let factors = [];
+                let num = n;
+                
+                for (let i = 2; i <= num; i++) 
+                {
+                    while (num % i === 0) 
+                    {
+                        factors.push(i);
+                        num /= i;
+                    }
+                }               
+                result.innerHTML = `${n} = ${factors.join(' x ')}`;
+            }
+        </script>
+    </body>
+</html>

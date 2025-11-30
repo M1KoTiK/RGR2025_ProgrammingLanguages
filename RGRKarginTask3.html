@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Задача3Каргин</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="800" height="600" style="border: 2px solid black;">
+    </canvas>
+    <br>
+    <button id="startBtn" onclick="start()">Старт</button>
+    <button id="pauseBtn" onclick="pause()">Пауза</button>
+    <button id="clearBtn" onclick="clearCanvas()">Очистить</button>
+
+    <script>
+        let canvas = document.getElementById('myCanvas');
+        let ctx = canvas.getContext('2d');
+        let startBtn = document.getElementById('startBtn');
+        let pauseBtn = document.getElementById('pauseBtn');
+        let clearBtn = document.getElementById('clearBtn');
+
+        let isRunning = false;
+        let intervalId = null;
+
+        function getRandomColor() 
+        {
+            let red = Math.floor(Math.random() * 256);
+            let green = Math.floor(Math.random() * 256);
+            let blue = Math.floor(Math.random() * 256);
+            return `rgb(${red}, ${green}, ${blue})`;
+        }
+
+        function drawCircle() 
+        {
+            let radius = Math.floor(Math.random() * 41) + 10;
+            let x = Math.floor(Math.random() * (canvas.width - radius * 2)) + radius;
+            let y = Math.floor(Math.random() * (canvas.height - radius * 2)) + radius;
+            let color = getRandomColor();
+
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
+        function start() 
+        {
+            if (isRunning) 
+            {
+                return;
+            }
+
+            isRunning = true;
+            intervalId = setInterval(drawCircle, 200);
+        }
+
+        function pause() 
+        {
+            if (!isRunning) 
+            {
+                return;
+            }
+
+            isRunning = false;
+            clearInterval(intervalId);
+        }
+
+        function clearCanvas() 
+        {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</body>
+</html>

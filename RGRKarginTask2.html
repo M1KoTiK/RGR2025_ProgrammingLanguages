@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Задача2Каргин</title>
+    </head>
+    <body>       
+        <div>
+            <label>Первое число</label>
+            <input type="number" id="num1">
+        </div>
+        
+        <div>
+            <label>Второе число</label>
+            <input type="number" id="num2">
+        </div>
+        
+        <button onclick="checkCoprime()">Проверить</button>
+        
+        <div id="result"></div>
+
+        <script>
+
+            function checkCoprime() 
+            {
+                let num1 = parseInt(document.getElementById('num1').value);
+                let num2 = parseInt(document.getElementById('num2').value);
+                let resultDiv = document.getElementById('result');
+                
+                if (isNaN(num1) || isNaN(num2) || num1 < 1 || num2 < 1) 
+                {
+                    resultDiv.innerHTML = "Введите корректные натуральные числа";
+                    return;
+                }
+                
+                let gcd = calculateGCD(num1, num2);
+                
+                if (gcd === 1) 
+                {
+                    resultDiv.innerHTML = `Числа ${num1} и ${num2} взаимно простые`;
+                } 
+                else 
+                {
+                    resultDiv.innerHTML = `Числа ${num1} и ${num2} не взаимно простые`;
+                }
+            }
+            
+            function calculateGCD(a, b) 
+            {
+                while (b !== 0) 
+                {
+                    const temp = b;
+                    b = a % b;
+                    a = temp;
+                }
+                return a;
+            }
+
+        </script>
+    </body>
+</html>
